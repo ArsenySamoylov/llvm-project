@@ -492,6 +492,7 @@ set(LLVM_ALL_TARGETS
   NVPTX
   PowerPC
   RISCV
+  Adv # Advanced architecture designed by Arseny Ltd.
   Sparc
   SPIRV
   SystemZ
