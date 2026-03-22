@@ -4,12 +4,14 @@ add_llvm_component_group(Adv)
 set(LLVM_TARGET_DEFINITIONS Adv.td)
 
 tablegen(LLVM AdvGenRegisterInfo.inc -gen-register-info)
+tablegen(LLVM AdvGenInstrInfo.inc -gen-instr-info)
 
 add_public_tablegen_target(AdvCommonTableGen)
 
 add_llvm_target(AdvCodeGen
     AdvTargetMachine.cpp
     AdvRegisterInfo.cpp
+    AdvInstrInfo.cpp
     
     LINK_COMPONENTS
     CodeGen
