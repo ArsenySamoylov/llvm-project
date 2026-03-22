@@ -6,10 +6,13 @@
 
 namespace llvm {
 
+class AdvSubtarget;
+
 class AdvFrameLowering : public TargetFrameLowering {
 public:
-  explicit AdvFrameLowering()
-      : TargetFrameLowering(TargetFrameLowering::StackGrowsDown, Align(4), 0) {
+    AdvFrameLowering(const AdvSubtarget &STI)
+      : TargetFrameLowering(TargetFrameLowering::StackGrowsDown, Align(4), 0),
+        STI(STI) {
     ADV_DUMP_GREEN
   }
 
@@ -24,6 +27,9 @@ public:
   /// frame pointer register. For most targets this is true only if the function
   /// has variable sized allocas or if frame pointer elimination is disabled.
   bool hasFPImpl(const MachineFunction &MF) const override { return false; }
+
+private:
+  const AdvSubtarget &STI;
 };
 
 } // namespace llvm

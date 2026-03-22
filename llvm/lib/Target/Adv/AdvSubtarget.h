@@ -2,6 +2,7 @@
 
 #include "adv.h"
 #include "AdvISelLowering.h"
+#include "AdvFrameLowering.h"
 
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
 
@@ -12,6 +13,8 @@ namespace llvm {
 
 class AdvSubtarget : public AdvGenSubtargetInfo {
   AdvTargetLowering TLInfo;
+  AdvFrameLowering FrameLowering;
+
 public:
   AdvSubtarget(const Triple &TT, const std::string &CPU, const std::string &FS,
                const TargetMachine &TM);
@@ -23,6 +26,11 @@ public:
   const AdvTargetLowering *getTargetLowering() const override {
     ADV_DUMP_CYAN
     return &TLInfo;
+  }
+
+  const AdvFrameLowering *getFrameLowering() const override {
+    ADV_DUMP_CYAN
+    return &FrameLowering;
   }
 };
 
