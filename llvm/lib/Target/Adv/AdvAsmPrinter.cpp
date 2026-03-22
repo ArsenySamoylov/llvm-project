@@ -42,6 +42,11 @@ public:
   StringRef getPassName() const override { return "Adv Assembly Printer"; }
 
   bool lowerPseudoInstExpansion(const MachineInstr *MI, MCInst &Inst);
+
+  // Used in pseudo lowerings
+  bool lowerOperand(const MachineOperand &MO, MCOperand &MCOp) const {
+    return LowerAdvMachineOperandToMCOperand(MO, MCOp, *this);
+  }
 };
 
 } // end anonymous namespace
@@ -57,6 +62,10 @@ void AdvAsmPrinter::emitInstruction(const MachineInstr *MI) {
     EmitToStreamer(*OutStreamer, OutInst);
     return;
   }
+
+  MCInst TmpInst;
+  if (!lowerAdvMachineInstrToMCInst(MI, TmpInst, *this))
+    EmitToStreamer(*OutStreamer, TmpInst);
 }
 
 // Force static initialization.

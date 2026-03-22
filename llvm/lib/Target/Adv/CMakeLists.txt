@@ -21,6 +21,7 @@ add_llvm_target(AdvCodeGen
     AdvAsmPrinter.cpp
     AdvISelDagToDag.cpp
     AdvISelLowering.cpp
+    AdvMCInstrLower.cpp
     
     LINK_COMPONENTS
     CodeGen

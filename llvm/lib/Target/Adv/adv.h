@@ -24,6 +24,19 @@
 namespace llvm {
 class AdvTargetMachine;
 class FunctionPass;
+class AdvSubtarget;
+class AsmPrinter;
+class InstructionSelector;
+class MCInst;
+class MCOperand;
+class MachineInstr;
+class MachineOperand;
+class PassRegistry;
+
+bool lowerAdvMachineInstrToMCInst(const MachineInstr *MI, MCInst &OutMI,
+                                  AsmPrinter &AP);
+bool LowerAdvMachineOperandToMCOperand(const MachineOperand &MO,
+                                       MCOperand &MCOp, const AsmPrinter &AP);
 
 FunctionPass *createAdvISelDag(AdvTargetMachine &TM, CodeGenOptLevel OptLevel);
 
