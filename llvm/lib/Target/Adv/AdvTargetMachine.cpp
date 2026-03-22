@@ -1,4 +1,6 @@
 #include "llvm/MC/TargetRegistry.h"
+#include "llvm/CodeGen/TargetPassConfig.h"
+
 #include <optional>
 
 #include "AdvTargetMachine.h"
@@ -25,4 +27,25 @@ AdvTargetMachine::AdvTargetMachine(const Target &T, const Triple &TT,
           Reloc::Static, getEffectiveCodeModel(CM, CodeModel::Small), OL) {
   ADV_DUMP_CYAN
   initAsmInfo();
+}
+
+namespace {
+
+/// Adv Code Generator Pass Configuration Options.
+class AdvPassConfig : public TargetPassConfig {
+public:
+  AdvPassConfig(AdvTargetMachine &TM, PassManagerBase &PM)
+      : TargetPassConfig(TM, PM) {}
+
+  bool addInstSelector() override {
+    ADV_DUMP_CYAN
+    return false;
+  }
+};
+
+} // end anonymous namespace
+
+TargetPassConfig *AdvTargetMachine::createPassConfig(PassManagerBase &PM) {
+  ADV_DUMP_CYAN
+  return new AdvPassConfig(*this, PM);
 }
