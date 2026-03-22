@@ -6,6 +6,7 @@ set(LLVM_TARGET_DEFINITIONS Adv.td)
 tablegen(LLVM AdvGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM AdvGenInstrInfo.inc -gen-instr-info)
 tablegen(LLVM AdvGenSubtargetInfo.inc -gen-subtarget)
+tablegen(LLVM AdvGenMCPseudoLowering.inc -gen-pseudo-lowering)
 
 add_public_tablegen_target(AdvCommonTableGen)
 
@@ -14,6 +15,7 @@ add_llvm_target(AdvCodeGen
     AdvRegisterInfo.cpp
     AdvInstrInfo.cpp
     AdvSubtarget.cpp
+    AdvAsmPrinter.cpp
     
     LINK_COMPONENTS
     CodeGen
@@ -21,6 +23,7 @@ add_llvm_target(AdvCodeGen
     Support
     Target
     AdvInfo
+    AsmPrinter
 
 
     ADD_TO_COMPONENT
