@@ -4,8 +4,10 @@
 #include "AdvISelLowering.h"
 #include "AdvFrameLowering.h"
 #include "AdvRegisterInfo.h"
+#include "AdvInstrInfo.h"
 
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
+#include "llvm/CodeGen/SelectionDAGTargetInfo.h"
 
 #define GET_SUBTARGETINFO_HEADER
 #include "AdvGenSubtargetInfo.inc"
@@ -16,6 +18,8 @@ class AdvSubtarget : public AdvGenSubtargetInfo {
   AdvTargetLowering TLInfo;
   AdvFrameLowering FrameLowering;
   AdvRegisterInfo RegInfo;
+  AdvInstrInfo InstrInfo;
+  SelectionDAGTargetInfo TSInfo;
 
 public:
   AdvSubtarget(const Triple &TT, const std::string &CPU, const std::string &FS,
@@ -38,6 +42,13 @@ public:
   const AdvRegisterInfo *getRegisterInfo() const override {
     ADV_DUMP_CYAN
     return &RegInfo;
+  }
+  
+  const AdvInstrInfo *getInstrInfo() const override { return &InstrInfo; }
+  
+  const SelectionDAGTargetInfo *getSelectionDAGInfo() const override {
+    ADV_DUMP_CYAN
+    return &TSInfo;
   }
 };
 
