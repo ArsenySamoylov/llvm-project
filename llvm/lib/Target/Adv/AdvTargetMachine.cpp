@@ -37,8 +37,13 @@ public:
   AdvPassConfig(AdvTargetMachine &TM, PassManagerBase &PM)
       : TargetPassConfig(TM, PM) {}
 
+  AdvTargetMachine &getAdvTargetMachine() const {
+    return getTM<AdvTargetMachine>();
+  }
+
   bool addInstSelector() override {
     ADV_DUMP_CYAN
+    addPass(createAdvISelDag(getAdvTargetMachine(), getOptLevel()));
     return false;
   }
 };

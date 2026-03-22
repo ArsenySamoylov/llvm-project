@@ -7,6 +7,7 @@ tablegen(LLVM AdvGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM AdvGenInstrInfo.inc -gen-instr-info)
 tablegen(LLVM AdvGenSubtargetInfo.inc -gen-subtarget)
 tablegen(LLVM AdvGenMCPseudoLowering.inc -gen-pseudo-lowering)
+tablegen(LLVM AdvGenDAGISel.inc -gen-dag-isel)
 
 add_public_tablegen_target(AdvCommonTableGen)
 
@@ -16,6 +17,7 @@ add_llvm_target(AdvCodeGen
     AdvInstrInfo.cpp
     AdvSubtarget.cpp
     AdvAsmPrinter.cpp
+    AdvISelDagToDag.cpp
     
     LINK_COMPONENTS
     CodeGen
@@ -24,6 +26,7 @@ add_llvm_target(AdvCodeGen
     Target
     AdvInfo
     AsmPrinter
+    SelectionDAG
 
 
     ADD_TO_COMPONENT
