@@ -11,6 +11,7 @@
 #include "AdvMCAsmInfo.h"
 
 #include "adv.h"
+#include "AdvInstrPrinter.h"
 
 using namespace llvm;
 
@@ -56,6 +57,16 @@ static MCAsmInfo *createAdvMCAsmInfo(const MCRegisterInfo &MRI,
   return MAI;
 }
 
+static MCInstPrinter *createAdvMCInstPrinter(const Triple &T,
+                                             unsigned SyntaxVariant,
+                                             const MCAsmInfo &MAI,
+                                             const MCInstrInfo &MII,
+                                             const MCRegisterInfo &MRI) {
+  ADV_DUMP_MAGENTA
+  return new AdvInstPrinter(MAI, MII, MRI);
+}
+
+
 // We need to define this function
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeAdvTargetMC() {
     ADV_DUMP_MAGENTA
@@ -68,4 +79,8 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeAdvTargetMC() {
     // Register the MC subtarget info.
     TargetRegistry::RegisterMCSubtargetInfo(TheAdvTarget,
                                           createAdvMCSubtargetInfo);
+    
+
+    // Register the MCInstPrinter
+    TargetRegistry::RegisterMCInstPrinter(TheAdvTarget, createAdvMCInstPrinter);
 }
