@@ -2,6 +2,7 @@ include "llvm/Target/Target.td"
 
 include "AdvRegisterInfo.td"
 include "AdvInstrInfo.td"
+include "AdvCallingConv.td"
 
 class Proc<string Name, list<SubtargetFeature> Features>
  : Processor<Name, NoItineraries, Features>;
