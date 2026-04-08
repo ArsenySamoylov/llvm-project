@@ -10,6 +10,7 @@ tablegen(LLVM AdvGenMCPseudoLowering.inc -gen-pseudo-lowering)
 tablegen(LLVM AdvGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM AdvGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM AdvGenAsmWriter.inc -gen-asm-writer)
+tablegen(LLVM AdvGenMCCodeEmitter.inc -gen-emitter)
 
 add_public_tablegen_target(AdvCommonTableGen)
 

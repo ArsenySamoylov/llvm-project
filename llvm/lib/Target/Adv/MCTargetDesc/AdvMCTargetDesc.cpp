@@ -80,7 +80,8 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeAdvTargetMC() {
     TargetRegistry::RegisterMCSubtargetInfo(TheAdvTarget,
                                           createAdvMCSubtargetInfo);
     
-
     // Register the MCInstPrinter
     TargetRegistry::RegisterMCInstPrinter(TheAdvTarget, createAdvMCInstPrinter);
+    // Register the MC Code Emitter.
+    TargetRegistry::RegisterMCCodeEmitter(TheAdvTarget, createAdvMCCodeEmitter);
 }
