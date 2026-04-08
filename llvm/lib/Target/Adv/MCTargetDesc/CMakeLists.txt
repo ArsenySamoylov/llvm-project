@@ -4,6 +4,7 @@ add_llvm_component_library(LLVMAdvDesc
     AdvInstrPrinter.cpp
     AdvMCCodeEmitter.cpp
     AdvAsmBackend.cpp
+    AdvELFObjectWriter.cpp
 
     LINK_COMPONENTS
     MC

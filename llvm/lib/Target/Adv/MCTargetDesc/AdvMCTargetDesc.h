@@ -6,6 +6,8 @@
 #define GET_REGINFO_ENUM
 #include "AdvGenRegisterInfo.inc"
 
+#include <memory>
+
 namespace llvm {
 class MCCodeEmitter;
 class MCContext;
@@ -21,6 +23,9 @@ MCCodeEmitter *createAdvMCCodeEmitter(const MCInstrInfo &MCII, MCContext &Ctx);
 MCAsmBackend *createAdvAsmBackend(const Target &T, const MCSubtargetInfo &STI,
                                   const MCRegisterInfo &MRI,
                                   const MCTargetOptions &Options);
+
+std::unique_ptr<MCObjectTargetWriter> createAdvELFObjectWriter(bool Is64Bit,
+                                                               uint8_t OSABI);
 } // namespace llvm
 
 
