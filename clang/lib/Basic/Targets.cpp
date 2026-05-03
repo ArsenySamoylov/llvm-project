@@ -33,6 +33,7 @@
 #include "Targets/PPC.h"
 #include "Targets/RISCV.h"
 #include "Targets/SPIR.h"
+#include "Targets/Adv.h"
 #include "Targets/Sparc.h"
 #include "Targets/SystemZ.h"
 #include "Targets/TCE.h"
@@ -469,7 +470,10 @@ std::unique_ptr<TargetInfo> AllocateTarget(const llvm::Triple &Triple,
     default:
       return std::make_unique<RISCV64TargetInfo>(Triple, Opts);
     }
-
+  
+  case llvm::Triple::adv:
+    return std::make_unique<AdvTargetInfo>(Triple, Opts);
+    
   case llvm::Triple::sparc:
     switch (os) {
     case llvm::Triple::Linux:
